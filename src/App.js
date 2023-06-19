@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import React from 'react';
+import { ReactKeycloakProvider } from '@react-keycloak/web';
+import keycloak from './keycloak';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <h1> Hello World! </h1>
   );
 }
 
-export default App;
+function eventLogger(event, error) {
+  console.log('Event:', event);
+  if (error) {
+    console.error('Error:', error);
+  }
+}
+
+function tokenLogger(tokens) {
+  console.log('Tokens:', tokens);
+}
+
+function KeycloakApp() {
+  return (
+    <ReactKeycloakProvider
+      initOptions={{ onLoad: 'login-required' }}
+      authClient={keycloak}
+      onEvent={eventLogger}
+      onTokens={tokenLogger}
+    >
+      <App />
+    </ReactKeycloakProvider>
+  );
+}
+
+export default KeycloakApp;
+

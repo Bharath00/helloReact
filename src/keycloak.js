@@ -1,6 +1,6 @@
 import Keycloak from "keycloak-js";
 const keycloak = new Keycloak({
- url: "https://keycloaktestisd.eastus.cloudapp.azure.com",
+ url: "https://testkeycloakapp.azurewebsites.net",
  realm: "ReactRealm",
  clientId: "ReactApp",
 });
